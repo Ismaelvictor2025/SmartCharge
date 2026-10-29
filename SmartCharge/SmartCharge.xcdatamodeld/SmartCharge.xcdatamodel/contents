@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
+    <entity name="VehicleEntity" representedClassName="VehicleEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="NO" attributeType="String"/>
+        <attribute name="make" optional="NO" attributeType="String"/>
+        <attribute name="model" optional="NO" attributeType="String"/>
+        <attribute name="theoreticalRangeKm" optional="NO" attributeType="Double" defaultValueString="400.0" usesScalarValueType="YES"/>
+        <attribute name="batteryCapacityKWh" optional="NO" attributeType="Double" defaultValueString="75.0" usesScalarValueType="YES"/>
+        <attribute name="supportedConnectorsRaw" optional="NO" attributeType="String" defaultValueString="CCS2"/>
+        <attribute name="isDefault" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="savedJourneys" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SavedJourneyEntity" inverseName="vehicle" inverseEntity="SavedJourneyEntity"/>
+    </entity>
+    <entity name="SavedJourneyEntity" representedClassName="SavedJourneyEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="originName" optional="NO" attributeType="String"/>
+        <attribute name="destinationName" optional="NO" attributeType="String"/>
+        <attribute name="totalDistanceKm" optional="NO" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="initialBatteryPercent" optional="NO" attributeType="Double" defaultValueString="0.8" usesScalarValueType="YES"/>
+        <attribute name="safetyReservePercent" optional="NO" attributeType="Double" defaultValueString="0.15" usesScalarValueType="YES"/>
+        <attribute name="routePreference" optional="NO" attributeType="String" defaultValueString="Safest"/>
+        <attribute name="riskLevel" optional="NO" attributeType="String" defaultValueString="LOW"/>
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="VehicleEntity" inverseName="savedJourneys" inverseEntity="VehicleEntity"/>
+    </entity>
+    <entity name="FavouriteStationEntity" representedClassName="FavouriteStationEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="NO" attributeType="String"/>
+        <attribute name="name" optional="NO" attributeType="String"/>
+        <attribute name="operatorName" optional="NO" attributeType="String"/>
+        <attribute name="latitude" optional="NO" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="NO" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="powerKW" optional="NO" attributeType="Double" defaultValueString="50.0" usesScalarValueType="YES"/>
+        <attribute name="connectorsRaw" optional="NO" attributeType="String" defaultValueString="CCS2"/>
+        <attribute name="savedAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="UserPreferencesEntity" representedClassName="UserPreferencesEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="defaultSafetyReserve" optional="NO" attributeType="Double" defaultValueString="0.15" usesScalarValueType="YES"/>
+        <attribute name="defaultRoutePreference" optional="NO" attributeType="String" defaultValueString="Safest"/>
+        <attribute name="selectedVehicleId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
+    <elements>
+        <element name="VehicleEntity" positionX="-150" positionY="-100" width="180" height="180"/>
+        <element name="SavedJourneyEntity" positionX="150" positionY="-100" width="180" height="180"/>
+        <element name="FavouriteStationEntity" positionX="-150" positionY="150" width="180" height="160"/>
+        <element name="UserPreferencesEntity" positionX="150" positionY="150" width="180" height="120"/>
+    </elements>
+</model>
